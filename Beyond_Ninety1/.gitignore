@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+.env
+.env.*
+
+# Tortoise ORM (migrations if used)
+migrations/
+
+# FastAPI cache
+*.log
+*.pid
+
+# Node (frontend)
+frontend/node_modules/
+frontend/.next/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+
+# Vite/React
+.vite/
+.DS_Store
+
+# Build artifacts
+*.egg-info/
+*.egg
+*.bak
+*.swp
+
+# Docker
+*.pid
+*.tar
+*.img
+
+# OS
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.code-workspace
+
+# Testing
+coverage/
+htmlcov/
+.pytest_cache/
