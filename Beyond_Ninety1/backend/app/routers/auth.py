@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from app.schemas.user import UserCreate, UserPublic, UserLogin, TokenResponse
 from app.services.auth_service import register_user, login_user
+from app.dependencies.auth import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -23,3 +24,7 @@ async def login(user_login: UserLogin):
             detail="Invalid email or password"
         )
     return {"access_token": token, "token_type": "bearer"}
+
+@router.get("/me", response_model=UserPublic)
+async def get_me(user = Depends(get_current_user)):
+    return user
