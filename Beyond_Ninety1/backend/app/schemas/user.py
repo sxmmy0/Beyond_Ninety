@@ -1,17 +1,14 @@
-from fastapi import FastAPI
-from tortoise.contrib.fastapi import register_tortoise
-from app.config import settings
+from pydantic import BaseModel, EmailStr
 
-app = FastAPI(title="Beyond Ninety API")
+class UserCreate(BaseModel):
+    email: EmailStr
+    username: str
+    password: str
 
-@app.get("/")
-async def root():
-    return {"message": "Welcome to Beyond Ninety!"}
+class UserPublic(BaseModel):
+    id: int
+    email: EmailStr
+    username: str
 
-register_tortoise(
-    app,
-    db_url=settings.DATABASE_URL,
-    modules={"models": ["app.models.user"]},  # Add other model paths later
-    generate_schemas=True,
-    add_exception_handlers=True,
-)
+    class Config:
+        orm_mode = True

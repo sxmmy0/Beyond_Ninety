@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 from app.config import settings
+from app.routers import auth
 
 app = FastAPI(title="Beyond Ninety API")
 
@@ -15,3 +16,5 @@ register_tortoise(
     generate_schemas=True,
     add_exception_handlers=True,
 )
+
+app.include_router(auth.router)
