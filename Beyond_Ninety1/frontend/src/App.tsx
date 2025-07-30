@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './auth/Login'
 import { useAuth } from './context/AuthContext'
 import Register from './auth/Register'
+import Dashboard from './pages/Dashboard'
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { token } = useAuth()
@@ -13,17 +14,19 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <>
               <h1 className="text-2xl text-center mt-20 font-bold">Welcome to Beyond Ninety 🎯</h1>
-              <p className="text-sm mt-4 text-center">
-                Don’t have an account? <a href="/register" className="text-blue-600 underline">Register here</a>
-              </p>
             </>
           </ProtectedRoute>
         } />
-        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   )
